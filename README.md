@@ -28,7 +28,7 @@ El repositorio contiene los siguientes archivos principales:
 
 1. Descargar el archivo principal:
    ```bash
-   wget https://repo.ottshow.net/app/XUI_1.5.5.zip -O /tmp/XUI_1.5.5.zip
+   wget https://github.com/Servextex/XUIv1.5.5/releases/download/start/XUI_1.5.5.zip -O /tmp/XUI_1.5.5.zip
    ```
 
 2. Cambiar al directorio temporal:
@@ -48,7 +48,7 @@ El repositorio contiene los siguientes archivos principales:
 
 5. Descargar archivo adicional:
    ```bash
-   wget https://repo.ottshow.net/app/crackedxui.zip
+   wget https://github.com/Servextex/XUIv1.5.5/releases/download/start/crackedxui.zip
    ```
 
 6. Descomprimir el archivo adicional:
