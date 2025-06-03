@@ -63,7 +63,7 @@ El repositorio contiene los siguientes archivos principales:
 
 8. Ejecutar la instalación final:
    ```bash
-   ./install
+   ./install.sh
    ```
 
 ## Comandos de Administración
