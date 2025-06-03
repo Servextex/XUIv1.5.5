@@ -43,7 +43,7 @@ El repositorio contiene los siguientes archivos principales:
 
 4. Ejecutar el script de instalación:
    ```bash
-   ./install.sh
+   ./install
    ```
 
 5. Descargar archivo adicional:
