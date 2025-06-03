@@ -1,0 +1,16 @@
+wget https://repo.ottshow.net/app/XUI_1.5.5.zip -O /tmp/XUI_1.5.5.zip
+
+
+cd /tmp
+
+apt install zip unzip -y ; unzip XUI_1.5.5.zip
+
+./install.sh
+
+wget https://repo.ottshow.net/app/crackedxui.zip
+
+unzip crackedxui.zip
+
+chmod 777 install.sh
+
+./install

@@ -1,0 +1,172 @@
+stop panel
+
+/home/xui/service stop
+
+start panel
+
+/home/xui/service start
+
+refresh database
+
+/home/xui/status
+
+list of tools
+
+/home/xui/tools
+
+create rescue access code
+
+/home/xui/tools rescue
+
+create rescue admin user
+
+/home/xui/tools user
+
+reauthorize loadbalancers on mysql
+
+/home/xui/tools mysql
+
+restore a blank database
+
+/home/xui/tools database
+
+clear migration database 
+
+/home/xui/tools migration
+
+flush all blocked ips
+
+/home/xui/tools flush
+
+regenerate ports from mysql
+
+/home/xui/tools ports
+
+regenerate access code from mysql
+
+/home/xui/tools access
+
+quick generate complete backup
+
+mysqldump -u root xui > xuiLT-backup.sql
+
+restore selected backup to xui
+
+mysql -u root xui < path/backup/file.sql
+
+
+
+Migration Process:
+First of all restore SQL file to migration database with following shell command
+mysql xui_migrate < database.sql
+Bash
+Now you have 2 ways to start migration process for XUI database. 1 by visiting the panel page and 2nd doing manually on shell.
+Start Migration On Panel Or Visit this URL and click on Migrate
+Start Migration On Shell:
+/home/xui/bin/php/bin/php /home/xui/includes/cli/migrate.php
+Bash
+Start Migration On Browser:
+Visit: http://host.com:port/accesscode/setup
+
+Banner
+If something’s went wrong, you can restore a blank XUI database and restart the process again by running following command.
+mysql xui < /home/xui/bin/install/database.sql
+Bash
+Reset Admin User and Password to admin:admin
+mysql
+Bash
+USE `xui`; REPLACE INTO `users`(`id`, `username`, `password`, `member_group_id`, `status`, `owner_id`, `date_registered`) VALUES(1, 'admin', '$6$rounds=20000$xui$eQfRsD2gsIUhoY5RnnYN82qiB5VeZTcHICQrFxXpa98J2R1454b6lzVHVjiJ.NP0gi0X3K7NXVgxeR1VhVhg61', 1, 1, 0, UNIX_TIMESTAMP());
+Bash
+Fix License Error
+/home/xui/status
+Bash
+How To Remove Old Panels From Server?
+Well, first of all it’s better idea to fresh install Ubuntu 20.04 on your server. If can’t before installing XUI, remove any old panel installed with following guide.
+
+Uninstall Xtream UI (Xtream Codes) from your server.
+sudo systemctl stop mysql.service
+Bash
+sudo apt purge mysql-server mysql-client mysql-common mysql-server-core-* mysql-client-core-* -y
+Bash
+sudo rm -rf /etc/mysql /var/lib/mysql /var/log/mysql 2>/dev/null
+Bash
+sudo apt autoremove -y
+Bash
+sudo apt autoclean -y
+Bash
+Then remove all Xtream UI / Xtream Codes related stuff from your server:
+sudo pkill -u xtreamcodes 2>/dev/null
+Bash
+sudo kill $(ps aux | grep '[p]hp' | awk '{print $2}') 2>/dev/null
+Bash
+sudo kill $(ps aux | grep '[n]ginx' | awk '{print $2}') 2>/dev/null
+Bash
+sudo chattr -i /home/xtreamcodes/iptv_xtream_codes/GeoLite2.mmdb 2>/dev/null
+Bash
+sudo rm -rf /home/xtreamcodes/iptv_xtream_codes/tmp/* 2>/dev/null
+Bash
+sudo rm -rf /home/xtreamcodes/iptv_xtream_codes/streams/* 2>/dev/null
+Bash
+sudo umount -f /home/xtreamcodes/iptv_xtream_codes/streams 2>/dev/null
+Bash
+sudo umount -f /home/xtreamcodes/iptv_xtream_codes/tmp 2>/dev/null
+Bash
+sudo sed -i '/xtreamcodes/d' /etc/fstab
+Bash
+sudo sed -i '/xtreamcodes/d' /etc/crontab
+Bash
+sudo sed -i '/xtreamcodes/d' /etc/sudoers
+Bash
+sudo deluser xtreamcodes 2>/dev/null
+Bash
+sudo groupdel xtreamcodes 2>/dev/null
+Bash
+sudo chown root:root -R /home/xtreamcodes 2>/dev/null
+Bash
+sudo chmod -R 0644 /home/xtreamcodes 2>/dev/null
+Bash
+sudo rm /var/lib/dpkg/lock-frontend /var/cache/apt/archives/lock /var/lib/dpkg/lock 2>/dev/null
+Bash
+sudo apt-get remove libcurl3 -y 2>/dev/null
+Bash
+Removing StreamCreed Panel:
+sudo systemctl stop mariadb.service 2>/dev/null
+Bash
+sudo apt-get purge mariadb-server -y
+Bash
+sudo rm -rf /etc/mysql /var/lib/mysql /var/log/mysql 2>/dev/null
+Bash
+sudo apt autoremove -y
+Bash
+sudo apt autoclean -y
+Bash
+Now remove all content related to StreamCreed on your server:
+sudo pkill -u streamcreed 2>/dev/null
+Bash
+sudo kill $(ps aux | grep '[p]hp' | awk '{print $2}') 2>/dev/null
+Bash
+sudo kill $(ps aux | grep '[n]ginx' | awk '{print $2}') 2>/dev/null
+Bash
+sudo rm -rf /home/streamcreed/tmp/* 2>/dev/null
+Bash
+sudo rm -rf /home/streamcreed/streams/* 2>/dev/null
+Bash
+sudo umount -f /home/streamcreed/streams 2>/dev/null
+Bash
+sudo umount -f /home/streamcreed/tmp 2>/dev/null
+Bash
+sudo sed -i '/streamcreed/d' /etc/fstab
+Bash
+sudo sed -i '/streamcreed/d' /etc/crontab
+Bash
+sudo sed -i '/streamcreed/d' /etc/sudoers
+Bash
+sudo deluser streamcreed 2>/dev/null
+Bash
+sudo groupdel streamcreed 2>/dev/null
+Bash
+sudo chown root:root -R /home/streamcreed 2>/dev/null
+Bash
+sudo chmod -R 0644 /home/streamcreed 2>/dev/null
+
+
